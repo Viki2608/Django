@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static "cicd/cicd.css" %}">
+{% endblock %}
+{% block page_title %}
+Dynaflo
+{% endblock %}
+
+{% block content %}
+
+<div class="sidebar">
+  <div class="logo-details">
+    <i class='bx bxl-c-plus-plus icon'></i>
+    <div class="logo_name">DynaFlo</div>
+    <i class='bx bx-menu' id="btn"></i>
+  </div>
+  <ul class="nav-list">
+    {% for item in nav_items %}
+    <li>
+      <a href="{{ item.url }}">
+        <i class='bx {{ item.icon }}'></i>
+        <span class="links_name">{{ item.name }}</span>
+      </a>
+      <span class="tooltip">{{ item.tooltip }}</span>
+    </li>
+    {% endfor %}
+    <li class="profile">
+      <div class="profile-details">
+        <img src="profile.jpg" alt="profileImg">
+        <div class="name_job">
+          <div class="name">{{ user }}</div>
+          <div class="job">Web designer</div>
+        </div>
+      </div>
+      <i class='bx bx-log-out' id="log_out"></i>
+    </li>
+  </ul>
+</div>
+
+<div class="container">
+  <form method="post" action="{% url 'process_form' %}">
+    {% csrf_token %}
+    {% for  field in form %}
+      <div class="input-box">
+        {{ field }}
+        <i class='bx bxs-user'></i>
+      </div>
+    {% endfor %}
+
+    <button type="submit" class="btn">Submit</button>
+  </form>
+</div>
+</div>
+
+
+{% endblock %}
